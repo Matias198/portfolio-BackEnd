@@ -34,8 +34,8 @@ public class Controller {
 //    }
     
     @PostMapping ("/registrar-usuario")
-    public void createPromoter(@ModelAttribute Persona PersonaDTO, @RequestParam Long id) throws URISyntaxException { 
-          PersonaDTO.setIdDNI(id);
+    public void createPromoter(@ModelAttribute Persona PersonaDTO, @RequestParam Long dni) throws URISyntaxException { 
+          PersonaDTO.setIdDNI(dni);
           persoServ.crearPersona(PersonaDTO);
     }
 }
