@@ -5,6 +5,7 @@ import com.integrador.tp.service.IPersonaService;
 import java.net.URISyntaxException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,7 @@ public class Controller {
 //    public String decirChau(@RequestParam String nombre, @RequestParam String apellido, @RequestParam int edad){
 //        return ("Chau Mundo " + nombre + " " + apellido + ", edad: " + edad);
 //    }
-    
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping ("/registrar-usuario")
     public void createPromoter(@ModelAttribute Persona PersonaDTO, @RequestParam Long dni) throws URISyntaxException { 
           PersonaDTO.setIdDNI(dni);
