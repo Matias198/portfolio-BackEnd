@@ -35,8 +35,7 @@ public class Controller {
 //    }
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping ("/registrar-usuario")
-    public void createPromoter(@ModelAttribute Persona PersonaDTO, @RequestParam Long dni) throws URISyntaxException { 
-          PersonaDTO.setIdDNI(dni);
+    public void createPromoter(@ModelAttribute Persona PersonaDTO) throws URISyntaxException { 
           persoServ.crearPersona(PersonaDTO);
     }
 }
