@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class Controller {
     @Autowired
     private IPersonaService persoServ;
@@ -32,7 +34,6 @@ public class Controller {
 //    public String decirChau(@RequestParam String nombre, @RequestParam String apellido, @RequestParam int edad){
 //        return ("Chau Mundo " + nombre + " " + apellido + ", edad: " + edad);
 //    }
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping ("/registrar-usuario")
     public void createPromoter(@ModelAttribute Persona PersonaDTO) throws URISyntaxException {
           persoServ.crearPersona(PersonaDTO);
