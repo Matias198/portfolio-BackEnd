@@ -17,7 +17,7 @@ import lombok.Setter;
 @Table(name = "persona")
 public class Persona implements Serializable {
     @Id
-    private Long idDNI;
+    private Long dni;
     //-------------------------
     
     private String nombres;

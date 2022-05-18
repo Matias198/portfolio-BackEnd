@@ -4,7 +4,6 @@ import com.integrador.tp.model.Persona;
 import com.integrador.tp.service.IPersonaService;
 import java.net.URISyntaxException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,7 +34,7 @@ public class Controller {
 //    }
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping ("/registrar-usuario")
-    public void createPromoter(@ModelAttribute Persona PersonaDTO) throws URISyntaxException { 
+    public void createPromoter(@ModelAttribute Persona PersonaDTO) throws URISyntaxException {
           persoServ.crearPersona(PersonaDTO);
     }
 }
@@ -45,5 +44,12 @@ spring.jpa.hibernate.ddl-auto=update
 spring.datasource.url = jdbc:mysql://localhost:3306/tpIntegradorDB?useSSL=false&serverTimezone=UTC
 spring.datasource.username=admin
 spring.datasource.password=admin
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+
+
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url = jdbc:mysql://sql10.freesqldatabase.com:3306/sql10493123?useSSL=false&serverTimezone=UTC
+spring.datasource.username=sql10493123
+spring.datasource.password=MZ6eFhy5jB
 spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
 */
