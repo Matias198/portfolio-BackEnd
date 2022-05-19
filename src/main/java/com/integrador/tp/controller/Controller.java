@@ -33,15 +33,10 @@ public class Controller {
         userServ.crearUsuario(UsuarioDTO);
     }
     
-    @PostMapping ("/iniciar-sesion")
-    public Usuario searchUser(@ModelAttribute Usuario UsuarioDTO) throws URISyntaxException {
-        Usuario user = userServ.buscarUsuario(UsuarioDTO.getIdUsuario());
-        if (UsuarioDTO.getPassword().equals(user.getPassword())){
-            return user;
-        }else{
-            return null;
-        }
-    }
+//    @PostMapping ("/iniciar-sesion")
+//    public Usuario searchUser(@ModelAttribute Usuario UsuarioDTO) throws URISyntaxException {
+//        
+//    }
 }
 
 /*
