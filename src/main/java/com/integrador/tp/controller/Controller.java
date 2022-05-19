@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,7 +28,7 @@ public class Controller {
     
     @PostMapping ("/crear-usuario")
     public void createUser(@ModelAttribute Usuario UsuarioDTO) throws URISyntaxException {
-        UsuarioDTO.setPersona(persoServ.buscarPersona(UsuarioDTO.getIdUsuario()));
+        UsuarioDTO.setPersona(persoServ.buscarPersona(UsuarioDTO.getId_usuario()));
         userServ.crearUsuario(UsuarioDTO);
     }
     

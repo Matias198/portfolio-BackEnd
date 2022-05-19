@@ -13,10 +13,8 @@ import lombok.Setter;
 @Entity
 public class Usuario implements Serializable {
     @Id
-    private Long idUsuario;
-    
+    private Long id_usuario;
     private String password;
-    
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "persona_id")
     private Persona persona;
