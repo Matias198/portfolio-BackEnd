@@ -21,5 +21,5 @@ public class Usuario implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "persona_id")
-    private Persona persona_id;
+    private Persona persona;
 }

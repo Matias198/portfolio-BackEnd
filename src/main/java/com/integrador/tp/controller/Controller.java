@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,12 +24,13 @@ public class Controller {
 
     @PostMapping ("/registrar-usuario")
     public void createPromoter(@ModelAttribute Persona PersonaDTO) throws URISyntaxException {
-          persoServ.crearPersona(PersonaDTO);
+        persoServ.crearPersona(PersonaDTO);
     }
     
     @PostMapping ("/crear-usuario")
-    public void createPromoter(@ModelAttribute Usuario UsuarioDTO) throws URISyntaxException {
-          userServ.crearUsuario(UsuarioDTO);
+    public void createPromoter(@ModelAttribute Usuario UsuarioDTO, @RequestParam Long dni) throws URISyntaxException {
+        UsuarioDTO.setPersona(persoServ.buscarPersona(dni));
+        userServ.crearUsuario(UsuarioDTO);
     }
 }
 
