@@ -25,5 +25,4 @@ public class UsuarioService implements IUsuarioService {
     public Usuario buscarUsuario(Long id) {
         return usrRepo.findById(id).orElse(null);
     }
-     
 }
