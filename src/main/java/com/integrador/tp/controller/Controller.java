@@ -1,17 +1,15 @@
 package com.integrador.tp.controller;
 
 import com.integrador.tp.model.Persona;
+import com.integrador.tp.model.Usuario;
 import com.integrador.tp.service.IPersonaService;
+import com.integrador.tp.service.IUsuarioService;
 import java.net.URISyntaxException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,24 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
     @Autowired
     private IPersonaService persoServ;
-
-
-    //persoServ.crearPersona(pers) en @PostMapping
-    //persoServ.borrarPersona(id) en @DeleteMapping
     
-    
-//    @GetMapping ("/inicio/{nombre}")
-//    public String decirHola(@PathVariable String nombre){
-//        return("Hola Mundo " + nombre);
-//    }
-//    
-//    @GetMapping ("/chau")
-//    public String decirChau(@RequestParam String nombre, @RequestParam String apellido, @RequestParam int edad){
-//        return ("Chau Mundo " + nombre + " " + apellido + ", edad: " + edad);
-//    }
+    @Autowired
+    private IUsuarioService userServ;
+
     @PostMapping ("/registrar-usuario")
     public void createPromoter(@ModelAttribute Persona PersonaDTO) throws URISyntaxException {
           persoServ.crearPersona(PersonaDTO);
+    }
+    
+    @PostMapping ("/crear-usuario")
+    public void createPromoter(@ModelAttribute Usuario UsuarioDTO) throws URISyntaxException {
+          userServ.crearUsuario(UsuarioDTO);
     }
 }
 
@@ -54,3 +46,17 @@ spring.datasource.username=sql10493123
 spring.datasource.password=MZ6eFhy5jB
 spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
 */
+
+//persoServ.crearPersona(pers) en @PostMapping
+    //persoServ.borrarPersona(id) en @DeleteMapping
+    
+    
+//    @GetMapping ("/inicio/{nombre}")
+//    public String decirHola(@PathVariable String nombre){
+//        return("Hola Mundo " + nombre);
+//    }
+//    
+//    @GetMapping ("/chau")
+//    public String decirChau(@RequestParam String nombre, @RequestParam String apellido, @RequestParam int edad){
+//        return ("Chau Mundo " + nombre + " " + apellido + ", edad: " + edad);
+//    }
