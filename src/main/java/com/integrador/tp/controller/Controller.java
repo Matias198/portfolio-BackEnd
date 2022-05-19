@@ -28,8 +28,8 @@ public class Controller {
     }
     
     @PostMapping ("/crear-usuario")
-    public void createUser(@ModelAttribute Usuario UsuarioDTO, @RequestParam Long dni) throws URISyntaxException {
-        UsuarioDTO.setPersona(persoServ.buscarPersona(dni));
+    public void createUser(@ModelAttribute Usuario UsuarioDTO) throws URISyntaxException {
+        UsuarioDTO.setPersona(persoServ.buscarPersona(UsuarioDTO.getIdUsuario()));
         userServ.crearUsuario(UsuarioDTO);
     }
     
