@@ -6,7 +6,7 @@ public interface IUsuarioService {
     
     public void crearUsuario (Usuario usr);
     
-    public void borrarUsuario (float id);
+    public void borrarUsuario (Long id);
     
-    public Usuario buscarUsuario(float id);
+    public Usuario buscarUsuario(Long id);
 }

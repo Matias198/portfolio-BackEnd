@@ -18,12 +18,12 @@ public class AcademicoService implements IAcademicoService {
     }
 
     @Override
-    public void borrarAcademico(float id) {
+    public void borrarAcademico(Long id) {
        academicRepo.deleteById(id);
     }
 
     @Override
-    public Academico bucasrAcademico(float id) {
+    public Academico bucasrAcademico(Long id) {
         return academicRepo.findById(id).orElse(null);
     }
     

@@ -5,8 +5,8 @@ import com.integrador.tp.model.Proyecto;
 public interface IProyectoService {
     public void crearProyecto (Proyecto pro);
     
-    public void borrarProyecto (float id);
+    public void borrarProyecto (Long id);
     
-    public Proyecto buscarProyecto(float id);
+    public Proyecto buscarProyecto(Long id);
     
 }

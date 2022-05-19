@@ -17,12 +17,12 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public void borrarUsuario(float id) {
+    public void borrarUsuario(Long id) {
         usrRepo.deleteById(id);
     }
 
     @Override
-    public Usuario buscarUsuario(float id) {
+    public Usuario buscarUsuario(Long id) {
         return usrRepo.findById(id).orElse(null);
     }
      

@@ -15,7 +15,7 @@ public class Experiencia implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private float idExperiencia;
+    private Long idExperiencia;
 
     private String titulo;
     private String establecimiento;

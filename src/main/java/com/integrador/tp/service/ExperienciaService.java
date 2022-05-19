@@ -17,12 +17,12 @@ public class ExperienciaService implements IExperienciaService{
     }
 
     @Override
-    public void borrarExperiencia(float id) {
+    public void borrarExperiencia(Long id) {
         expRepo.deleteById(id);
     }
 
     @Override
-    public Experiencia bucasrExperiencia(float id) {
+    public Experiencia bucasrExperiencia(Long id) {
         return expRepo.findById(id).orElse(null);
     }
     

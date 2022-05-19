@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private float idUsuario;
+    private Long idUsuario;
     private String password;
 
     @OneToOne(fetch = FetchType.LAZY)

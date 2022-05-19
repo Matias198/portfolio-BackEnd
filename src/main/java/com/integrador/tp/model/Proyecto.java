@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Proyecto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
-    private float idProyecto;
+    private Long idProyecto;
     
     private String titulo;
     private String descripcion;

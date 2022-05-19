@@ -17,12 +17,12 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
-    public void borrarPersona(float id) {
+    public void borrarPersona(Long id) {
         persoRepo.deleteById(id);
     }
 
     @Override
-    public Persona buscarPersona(float id) {
+    public Persona buscarPersona(Long id) {
         return persoRepo.findById(id).orElse(null);
     }
 

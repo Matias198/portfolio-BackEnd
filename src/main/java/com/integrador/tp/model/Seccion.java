@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Seccion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private float idSeccion;
+    private Long idSeccion;
     @ManyToOne
     private Persona idPersona;
     private String titulo;

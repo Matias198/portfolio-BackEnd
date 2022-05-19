@@ -28,7 +28,7 @@ public class Controller {
     }
     
     @PostMapping ("/crear-usuario")
-    public void createPromoter(@ModelAttribute Usuario UsuarioDTO, @RequestParam Long dni) throws URISyntaxException {
+    public void createUser(@ModelAttribute Usuario UsuarioDTO, @RequestParam Long dni) throws URISyntaxException {
         UsuarioDTO.setPersona(persoServ.buscarPersona(dni));
         userServ.crearUsuario(UsuarioDTO);
     }

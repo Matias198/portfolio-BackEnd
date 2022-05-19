@@ -19,7 +19,7 @@ public class Academico implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private float idAcademico;
+    private Long idAcademico;
     //-------------------------
            
     private String escuela;

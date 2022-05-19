@@ -17,12 +17,12 @@ public class ProyectoService implements IProyectoService{
     }
 
     @Override
-    public void borrarProyecto(float id) {
+    public void borrarProyecto(Long id) {
         proRepo.deleteById(id);
     }
 
     @Override
-    public Proyecto buscarProyecto(float id) {
+    public Proyecto buscarProyecto(Long id) {
         return proRepo.findById(id).orElse(null);
     }
     

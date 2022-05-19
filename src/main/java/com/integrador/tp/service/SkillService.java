@@ -15,12 +15,12 @@ public class SkillService  implements ISkillService{
         skillRepo.save(skill);}
 
     @Override
-    public void borrarSkill(float id) {
+    public void borrarSkill(Long id) {
         skillRepo.deleteById(id);
     }
 
     @Override
-    public Skill buscarSkill(float id) {
+    public Skill buscarSkill(Long id) {
         return skillRepo.findById(id).orElse(null);
     }
 }

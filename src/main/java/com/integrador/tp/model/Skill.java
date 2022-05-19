@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Skill implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private float idSkill;
+    private Long idSkill;
     
     private String titulo;
     private String progreso; 

@@ -5,7 +5,7 @@ import com.integrador.tp.model.Academico;
 public interface IAcademicoService {
     public void crearAcademico(Academico academic);
     
-    public void borrarAcademico(float id);
+    public void borrarAcademico(Long id);
     
-    public Academico bucasrAcademico(float id);
+    public Academico bucasrAcademico(Long id);
 }

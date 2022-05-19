@@ -16,12 +16,12 @@ public class SeccionService implements ISeccionService{
     }
 
     @Override
-    public void borrarSeccion(float id) {
+    public void borrarSeccion(Long id) {
         seccionRepo.deleteById(id);
     }
 
     @Override
-    public Seccion buscarSeccion(float id) {
+    public Seccion buscarSeccion(Long id) {
         return seccionRepo.findById(id).orElse(null);
     }
     

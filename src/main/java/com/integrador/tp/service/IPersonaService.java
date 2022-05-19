@@ -6,8 +6,8 @@ public interface IPersonaService {
     
     public void crearPersona (Persona per);
     
-    public void borrarPersona (float id);
+    public void borrarPersona (Long id);
     
-    public Persona buscarPersona (float id);
+    public Persona buscarPersona (Long id);
     
 }
