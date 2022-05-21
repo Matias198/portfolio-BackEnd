@@ -1,5 +1,6 @@
 package com.integrador.tp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,12 +17,12 @@ public class Seccion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSeccion;
-    @ManyToOne
-    private Persona idPersona;
+
     private String titulo;
     private String descripcion;
     
     @ManyToOne()
-    @JoinColumn(name = "persona_id")
+    @JoinColumn(name = "persona_id", referencedColumnName = "dni")
+    @JsonBackReference
     private Persona persona;
 }

@@ -1,7 +1,9 @@
 package com.integrador.tp.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +20,6 @@ import lombok.Setter;
 public class Persona implements Serializable {
     @Id
     private Long dni;
-    //-------------------------
     
     private String nombres;
     private String apellido;
@@ -29,21 +30,31 @@ public class Persona implements Serializable {
     private String image_background;
     private String image_perfil;
     
-    //-------------------------
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Academico> academicos;
+    @JsonManagedReference
+    private Set<Academico> academicos;
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Experiencia> experiencias;
+    @JsonManagedReference
+    private Set<Experiencia> experiencias;
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Proyecto> proyectos;
+    @JsonManagedReference
+    private Set<Proyecto> proyectos;
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Seccion> secciones;
+    @JsonManagedReference
+    private Set<Seccion> secciones;
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Skill> skills;
+    @JsonManagedReference
+    private Set<Skill> skills;
+    
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Compania compania;
+    
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Escuela escuela;
     
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Usuario usuario;

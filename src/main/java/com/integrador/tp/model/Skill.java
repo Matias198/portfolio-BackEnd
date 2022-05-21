@@ -1,6 +1,7 @@
 
 package com.integrador.tp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,8 @@ public class Skill implements Serializable {
     private String progreso; 
     
     @ManyToOne()
-    @JoinColumn(name = "persona_id")
+    @JoinColumn(name = "persona_id", referencedColumnName = "dni")
+    @JsonBackReference
     private Persona persona;
   
 }

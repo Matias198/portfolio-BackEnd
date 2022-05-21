@@ -1,6 +1,7 @@
 
 package com.integrador.tp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,11 +28,12 @@ public class Academico implements Serializable {
     private String imagen;
     private String carrera;
     private int puntaje;
-    private int inicio;
-    private int fin;
+    private String inicio;
+    private String fin;
    
     @ManyToOne()
-    @JoinColumn(name = "persona_id")
+    @JoinColumn(name = "persona_id", referencedColumnName = "dni")
+    @JsonBackReference
     private Persona persona;
     
 }
