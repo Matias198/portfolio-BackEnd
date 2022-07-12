@@ -2,6 +2,7 @@
 package com.integrador.tp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,17 +24,18 @@ public class Academico implements Serializable {
     private Long idAcademico;
     //-------------------------
            
-    private String escuela;
-    private String titulo;
-    private String imagen;
-    private String carrera;
-    private int puntaje;
-    private String inicio;
-    private String fin;
+    @NotNull private String escuela;
+    @NotNull private String titulo;
+    @NotNull private String imagen;
+    @NotNull private String carrera;
+    @NotNull private int puntaje;
+    @NotNull private String inicio;
+    @NotNull private String fin;
    
-    @ManyToOne()
-    @JoinColumn(name = "persona_id", referencedColumnName = "dni")
-    @JsonBackReference
+    @ManyToOne() 
+    @JoinColumn(name = "persona_id", referencedColumnName = "dni") 
+    @JsonBackReference 
+    @NotNull 
     private Persona persona;
     
 }

@@ -2,6 +2,7 @@
 package com.integrador.tp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,12 +24,13 @@ public class Compania implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_compania;
     
-    private String nombre;
-    private String imagen;
-    private String url;
+    @NotNull private String nombre;
+    @NotNull private String imagen;
+    @NotNull private String url;
     
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "persona_id", referencedColumnName = "dni")
-    @JsonBackReference
+    @JsonBackReference 
+    @NotNull 
     private Persona persona;
 }

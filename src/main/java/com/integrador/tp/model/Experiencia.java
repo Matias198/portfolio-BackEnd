@@ -1,5 +1,6 @@
 package com.integrador.tp.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,19 +19,20 @@ public class Experiencia implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idExperiencia;
 
-    private String titulo;
-    private String establecimiento;
-    private String lugar;
-    private String desde;
-    private String hasta;
-    private String duracion;
-    private String ciudad;
-    private String provincia;
-    private String pais;
-    private String imagen;
+    @NotNull private String titulo;
+    @NotNull private String establecimiento;
+    @NotNull private String lugar;
+    @NotNull private String desde;
+    @NotNull private String hasta;
+    @NotNull private String duracion;
+    @NotNull private String ciudad;
+    @NotNull private String provincia;
+    @NotNull private String pais;
+    @NotNull private String imagen;
 
     @ManyToOne()
     @JoinColumn(name = "persona_id", referencedColumnName = "dni")
     @JsonBackReference
+    @NotNull 
     private Persona persona;
 }

@@ -2,6 +2,7 @@
 package com.integrador.tp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,12 +20,13 @@ public class Skill implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSkill;
     
-    private String titulo;
-    private String progreso; 
+    @NotNull private String titulo;
+    @NotNull private String progreso; 
     
     @ManyToOne()
     @JoinColumn(name = "persona_id", referencedColumnName = "dni")
     @JsonBackReference
+    @NotNull 
     private Persona persona;
   
 }
