@@ -1,8 +1,8 @@
 package com.integrador.tp.controller;
 
-import com.integrador.tp.model.Academico;
+import com.integrador.tp.model.Compania;
 import com.integrador.tp.security.dto.Mensaje;
-import com.integrador.tp.service.IAcademicoService;
+import com.integrador.tp.service.ICompaniaService;
 import com.integrador.tp.service.IPersonaService;
 import java.net.URISyntaxException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
-public class AcademicoController {
+public class CompaniaController {
 
-    @Autowired
-    private IAcademicoService aServ;
     @Autowired
     private IPersonaService peServ;
 
-    @PostMapping("/crear-academico")
-    public ResponseEntity<?> crearAcademico(@ModelAttribute Academico AcademicoDTO, @RequestParam Long dni) throws URISyntaxException {
+    @Autowired
+    private ICompaniaService cServ;
+
+    @PostMapping("/crear-compania")
+    public ResponseEntity<?> crearCompania(@ModelAttribute Compania CompaniaDTO, @RequestParam Long dni) throws URISyntaxException {
         try {
             if (peServ.buscarPersona(dni) != null) {
-                AcademicoDTO.setPersona(peServ.buscarPersona(dni));
-                aServ.crearAcademico(AcademicoDTO);
+                CompaniaDTO.setPersona(peServ.buscarPersona(dni));
+                cServ.crearCompania(CompaniaDTO);
                 return new ResponseEntity(new Mensaje("Registro exitoso"), HttpStatus.OK);
             }else{
                 return new ResponseEntity(new Mensaje("Persona inexistente con DNI: " + dni), HttpStatus.BAD_REQUEST);
@@ -40,26 +41,25 @@ public class AcademicoController {
         }
     }
 
-    @PostMapping("/borrar-academico/{id}")
-    public ResponseEntity<?> borrarAcademico(@PathVariable(value = "id") Long id) throws URISyntaxException {
+    @PostMapping("/borrar-compania/{id}")
+    public ResponseEntity<?> borrarCompania(@PathVariable(value = "id") Long id) throws URISyntaxException {
         try {
-            aServ.borrarAcademico(id);
+            cServ.borrarCompania(id);
             return new ResponseEntity(new Mensaje("Eliminado exitosamente"), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(new Mensaje("Error inesperado " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PostMapping("/modificar-academico/{id}/{dni}")
-    public ResponseEntity<?> modificarAcademico(@ModelAttribute Academico AcademicoDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
+    @PostMapping("/modificar-compania/{id}/{dni}")
+    public ResponseEntity<?> modificarCompania(@ModelAttribute Compania CompaniaDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
-            AcademicoDTO.setIdAcademico(id);
-            AcademicoDTO.setPersona(peServ.buscarPersona(dni));
-            aServ.crearAcademico(AcademicoDTO);
+            CompaniaDTO.setId_compania(id);
+            CompaniaDTO.setPersona(peServ.buscarPersona(dni));
+            cServ.crearCompania(CompaniaDTO);
             return new ResponseEntity(new Mensaje("Modificado exitosamente"), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(new Mensaje("Error inesperado " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
-
     }
 }

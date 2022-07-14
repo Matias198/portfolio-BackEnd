@@ -1,9 +1,9 @@
 package com.integrador.tp.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.integrador.tp.security.entity.UsuarioJwt;
 import com.sun.istack.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,7 +21,6 @@ import lombok.Setter;
 public class Persona implements Serializable {
     @Id
     private Long dni;
-    
     @NotNull private String nombres;
     @NotNull private String apellido;
     @NotNull private String fecha_nacimiento;
@@ -33,38 +32,30 @@ public class Persona implements Serializable {
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    @NotNull 
     private Set<Academico> academicos;
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    @NotNull 
     private Set<Experiencia> experiencias;
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    @NotNull 
     private Set<Proyecto> proyectos;
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    @NotNull 
     private Set<Seccion> secciones;
     
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    @NotNull 
     private Set<Skill> skills;
     
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @NotNull 
     private Compania compania;
     
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @NotNull 
     private Escuela escuela;
     
     @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @NotNull 
-    private Usuario usuario;
+    private UsuarioJwt usuariojwt;
 }
