@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,7 +28,8 @@ public class CompaniaController {
     private ICompaniaService cServ;
 
     @PostMapping("/crear-compania")
-    public ResponseEntity<?> crearCompania(@ModelAttribute Compania CompaniaDTO, @RequestParam Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> crearCompania(@RequestBody Compania CompaniaDTO, @RequestParam Long dni) throws URISyntaxException {
         try {
             if (peServ.buscarPersona(dni) != null) {
                 CompaniaDTO.setPersona(peServ.buscarPersona(dni));
@@ -42,6 +44,7 @@ public class CompaniaController {
     }
 
     @PostMapping("/borrar-compania/{id}")
+    @ResponseBody
     public ResponseEntity<?> borrarCompania(@PathVariable(value = "id") Long id) throws URISyntaxException {
         try {
             cServ.borrarCompania(id);
@@ -52,7 +55,8 @@ public class CompaniaController {
     }
 
     @PostMapping("/modificar-compania/{id}/{dni}")
-    public ResponseEntity<?> modificarCompania(@ModelAttribute Compania CompaniaDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> modificarCompania(@RequestBody Compania CompaniaDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
             CompaniaDTO.setId_compania(id);
             CompaniaDTO.setPersona(peServ.buscarPersona(dni));

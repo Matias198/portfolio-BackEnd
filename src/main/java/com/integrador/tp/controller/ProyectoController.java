@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,7 +27,8 @@ public class ProyectoController {
     private IProyectoService prServ;
 
     @PostMapping("/crear-proyecto")
-    public ResponseEntity<?> crearProyecto(@ModelAttribute Proyecto ProyectoDTO, @RequestParam Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> crearProyecto(@RequestBody Proyecto ProyectoDTO, @RequestParam Long dni) throws URISyntaxException {
         try {
             if (peServ.buscarPersona(dni) != null) {
                 ProyectoDTO.setPersona(peServ.buscarPersona(dni));
@@ -41,6 +43,7 @@ public class ProyectoController {
     }
 
     @PostMapping("/borrar-proyecto/{id}")
+    @ResponseBody
     public ResponseEntity<?> borrarProyecto(@PathVariable(value = "id") Long id) throws URISyntaxException {
         try {
             prServ.borrarProyecto(id);
@@ -51,7 +54,8 @@ public class ProyectoController {
     }
 
     @PostMapping("/modificar-proyecto/{id}/{dni}")
-    public ResponseEntity<?> modificarProyecto(@ModelAttribute Proyecto ProyectoDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> modificarProyecto(@RequestBody Proyecto ProyectoDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
             ProyectoDTO.setIdProyecto(id);
             ProyectoDTO.setPersona(peServ.buscarPersona(dni));

@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,7 +28,8 @@ public class EscuelaController {
     private IEscuelaService esServ;
 
     @PostMapping("/crear-escuela")
-    public ResponseEntity<?> crearEscuela(@ModelAttribute Escuela EscuelaDTO, @RequestParam Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> crearEscuela(@RequestBody Escuela EscuelaDTO, @RequestParam Long dni) throws URISyntaxException {
         try {
             if (peServ.buscarPersona(dni) != null) {
                 EscuelaDTO.setPersona(peServ.buscarPersona(dni));
@@ -42,6 +44,7 @@ public class EscuelaController {
     }
     
     @PostMapping("/borrar-escuela/{id}")
+    @ResponseBody
     public ResponseEntity<?> borrarEscuela(@PathVariable(value = "id") Long id) throws URISyntaxException {
         try {
             esServ.borrarEscuela(id);
@@ -52,7 +55,8 @@ public class EscuelaController {
     }
     
     @PostMapping("/modificar-escuela/{id}/{dni}")
-    public ResponseEntity<?> modificarEscuela(@ModelAttribute Escuela EscuelaDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> modificarEscuela(@RequestBody Escuela EscuelaDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
             EscuelaDTO.setId_escuela(id);
             EscuelaDTO.setPersona(peServ.buscarPersona(dni));

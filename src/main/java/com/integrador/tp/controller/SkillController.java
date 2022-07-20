@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,7 +28,8 @@ public class SkillController {
     private ISkillService skServ;
 
     @PostMapping("/crear-skill")
-    public ResponseEntity<?> crearSkill(@ModelAttribute Skill SkillDTO, @RequestParam Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> crearSkill(@RequestBody Skill SkillDTO, @RequestParam Long dni) throws URISyntaxException {
         try {
             if (peServ.buscarPersona(dni) != null) {
                 SkillDTO.setPersona(peServ.buscarPersona(dni));
@@ -42,6 +44,7 @@ public class SkillController {
     }
     
     @PostMapping("/borrar-skill/{id}")
+    @ResponseBody
     public ResponseEntity<?> borrarSkill(@PathVariable(value = "id") Long id) throws URISyntaxException {
         try {
             skServ.borrarSkill(id);
@@ -52,7 +55,8 @@ public class SkillController {
     }
     
     @PostMapping("/modificar-skill/{id}/{dni}")
-    public ResponseEntity<?> modificarSkill(@ModelAttribute Skill SkillDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> modificarSkill(@RequestBody Skill SkillDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
             SkillDTO.setIdSkill(id);
             SkillDTO.setPersona(peServ.buscarPersona(dni));

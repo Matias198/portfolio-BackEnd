@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,7 +28,8 @@ public class ExperienciaController {
     private IExperienciaService exServ;
 
     @PostMapping("/crear-experiencia")
-    public ResponseEntity<?> crearExperiencia(@ModelAttribute Experiencia ExperienciaDTO, @RequestParam Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> crearExperiencia(@RequestBody Experiencia ExperienciaDTO, @RequestParam Long dni) throws URISyntaxException {
         try {
             if (peServ.buscarPersona(dni) != null) {
                 ExperienciaDTO.setPersona(peServ.buscarPersona(dni));
@@ -42,6 +44,7 @@ public class ExperienciaController {
     }
 
     @PostMapping("/borrar-experiencia/{id}")
+    @ResponseBody
     public ResponseEntity<?> borrarExperiencia(@PathVariable(value = "id") Long id) throws URISyntaxException {
         try {
             exServ.borrarExperiencia(id);
@@ -52,7 +55,8 @@ public class ExperienciaController {
     }
 
     @PostMapping("/modificar-experiencia/{id}/{dni}")
-    public ResponseEntity<?> modificarExperiencia(@ModelAttribute Experiencia ExperienciaDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> modificarExperiencia(@RequestBody Experiencia ExperienciaDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
             ExperienciaDTO.setIdExperiencia(id);
             ExperienciaDTO.setPersona(peServ.buscarPersona(dni));

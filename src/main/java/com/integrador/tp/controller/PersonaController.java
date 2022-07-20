@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +29,8 @@ public class PersonaController {
     private UService uServ;
 
     @PostMapping("/crear-persona")
-    public ResponseEntity<?> crearPersona(@ModelAttribute Persona PersonaDTO) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> crearPersona(@RequestBody Persona PersonaDTO) throws URISyntaxException {
         try {
             PersonaDTO.setUsuariojwt(uServ.getUsuarioByDni(PersonaDTO.getDni()).get());
             peServ.crearPersona(PersonaDTO);
@@ -39,6 +41,7 @@ public class PersonaController {
     }
 
     @PostMapping("/borrar-persona")
+    @ResponseBody
     public ResponseEntity<?> borrarPersona(@RequestParam Long dni) throws URISyntaxException {
         try {
             peServ.borrarPersona(dni);
@@ -49,7 +52,8 @@ public class PersonaController {
     }
 
     @PostMapping("/modificar-persona")
-    public ResponseEntity<?> modificarPersona(@ModelAttribute Persona PersonaDTO, @RequestParam Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> modificarPersona(@RequestBody Persona PersonaDTO, @RequestParam Long dni) throws URISyntaxException {
         try {
             PersonaDTO.setDni(dni);
             peServ.crearPersona(PersonaDTO);

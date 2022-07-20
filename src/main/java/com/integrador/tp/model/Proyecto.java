@@ -23,6 +23,7 @@ public class Proyecto implements Serializable {
     
     @NotNull private String titulo;
     @NotNull private String descripcion;
+    @NotNull private String link;
     
     @ManyToOne()
     @JoinColumn(name = "persona_id", referencedColumnName = "dni")

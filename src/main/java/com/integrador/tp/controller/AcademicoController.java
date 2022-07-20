@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,7 +27,8 @@ public class AcademicoController {
     private IPersonaService peServ;
 
     @PostMapping("/crear-academico")
-    public ResponseEntity<?> crearAcademico(@ModelAttribute Academico AcademicoDTO, @RequestParam Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> crearAcademico(@RequestBody Academico AcademicoDTO, @RequestParam Long dni) throws URISyntaxException {
         try {
             if (peServ.buscarPersona(dni) != null) {
                 AcademicoDTO.setPersona(peServ.buscarPersona(dni));
@@ -41,6 +43,7 @@ public class AcademicoController {
     }
 
     @PostMapping("/borrar-academico/{id}")
+    @ResponseBody
     public ResponseEntity<?> borrarAcademico(@PathVariable(value = "id") Long id) throws URISyntaxException {
         try {
             aServ.borrarAcademico(id);
@@ -51,7 +54,8 @@ public class AcademicoController {
     }
 
     @PostMapping("/modificar-academico/{id}/{dni}")
-    public ResponseEntity<?> modificarAcademico(@ModelAttribute Academico AcademicoDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
+    @ResponseBody
+    public ResponseEntity<?> modificarAcademico(@RequestBody Academico AcademicoDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
             AcademicoDTO.setIdAcademico(id);
             AcademicoDTO.setPersona(peServ.buscarPersona(dni));
