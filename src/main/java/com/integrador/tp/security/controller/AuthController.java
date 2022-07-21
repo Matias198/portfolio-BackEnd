@@ -104,7 +104,7 @@ public class AuthController {
     }
     
     @PostMapping("/nuevo-rol")
-    public ResponseEntity<JwtDto> login(@Valid @RequestBody Rol rol) {
+    public ResponseEntity<JwtDto> nuevoRol(@Valid @RequestBody Rol rol) {
         try {
             if ((rol.getRolNombre().equals(RolNombre.ROLE_ADMIN)) || 
                 (rol.getRolNombre().equals(RolNombre.ROLE_GUEST)) || 
