@@ -27,7 +27,7 @@ public class PersonaController {
     @Autowired
     private UService uServ;
 
-    @PostMapping("/auth/crear-persona")
+    @PostMapping("/crear-persona")
     @ResponseBody
     public ResponseEntity<?> crearPersona(@RequestBody Persona PersonaDTO) throws URISyntaxException {
         try {
