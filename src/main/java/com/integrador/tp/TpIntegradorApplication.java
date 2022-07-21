@@ -19,7 +19,7 @@ public class TpIntegradorApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("https://porfolio-matias-fernandez.web.app");//.allowedMethods("*").allowedHeaders("*");
+                registry.addMapping("/**-javaconfig").allowedOrigins("https://porfolio-matias-fernandez.web.app");//.allowedMethods("*").allowedHeaders("*");
             }
         };
     }
