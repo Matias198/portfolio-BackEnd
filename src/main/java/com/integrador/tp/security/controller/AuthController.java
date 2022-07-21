@@ -102,4 +102,20 @@ public class AuthController {
             return new ResponseEntity(new Mensaje("Error inesperado: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
+    
+    @PostMapping("/nuevo-rol")
+    public ResponseEntity<JwtDto> login(@Valid @RequestBody Rol rol) {
+        try {
+            if ((rol.getRolNombre().equals(RolNombre.ROLE_ADMIN)) || 
+                (rol.getRolNombre().equals(RolNombre.ROLE_GUEST)) || 
+                (rol.getRolNombre().equals(RolNombre.ROLE_USER))){
+                rolService.save(rol);
+                return new ResponseEntity(rol, HttpStatus.OK);
+            }else{
+                return new ResponseEntity(new Mensaje("El rol ingresado no es valido"), HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity(new Mensaje("Error inesperado: " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
 }
