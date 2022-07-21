@@ -26,7 +26,7 @@ public class PersonaController {
     
     @Autowired
     private UService uServ;
-
+    
     @PostMapping("/crear-persona")
     @ResponseBody
     public ResponseEntity<?> crearPersona(@RequestBody Persona PersonaDTO) throws URISyntaxException {
@@ -61,7 +61,8 @@ public class PersonaController {
             return new ResponseEntity(new Mensaje("Error inesperado " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
-
+    
+    @CrossOrigin(origins = "https://porfolio-matias-fernandez.web.app")
     @GetMapping("/portfolio")
     @ResponseBody
     public Persona getPersona(@RequestParam Long dni) {
