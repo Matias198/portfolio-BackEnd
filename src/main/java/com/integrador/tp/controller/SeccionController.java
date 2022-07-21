@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +45,7 @@ public class SeccionController {
         }
     }
 
-    @PostMapping("/borrar-seccion/{id}")
+    @DeleteMapping("/borrar-seccion/{id}")
     @ResponseBody
     public ResponseEntity<?> borrarSeccion(@PathVariable(value = "id") Long id) throws URISyntaxException {
         try {
@@ -54,7 +56,7 @@ public class SeccionController {
         }
     }
 
-    @PostMapping("/modificar-seccion/{id}/{dni}")
+    @PutMapping("/modificar-seccion/{id}/{dni}")
     @ResponseBody
     public ResponseEntity<?> modificarSeccion(@RequestBody Seccion seccionDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {

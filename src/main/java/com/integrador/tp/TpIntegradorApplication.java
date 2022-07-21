@@ -2,9 +2,6 @@ package com.integrador.tp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.web.servlet.config.annotation.CorsRegistry;
-//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class TpIntegradorApplication {
@@ -14,13 +11,4 @@ public class TpIntegradorApplication {
         System.out.println("Backend iniciado");
     }
 
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/**-javaconfig").allowedOrigins("*").allowedMethods("*").allowedHeaders("*");
-//            }
-//        };
-//    }
 }

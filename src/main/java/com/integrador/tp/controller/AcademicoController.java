@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +44,7 @@ public class AcademicoController {
         }
     }
 
-    @PostMapping("/borrar-academico/{id}")
+    @DeleteMapping("/borrar-academico/{id}")
     @ResponseBody
     public ResponseEntity<?> borrarAcademico(@PathVariable(value = "id") Long id) throws URISyntaxException {
         try {
@@ -53,7 +55,7 @@ public class AcademicoController {
         }
     }
 
-    @PostMapping("/modificar-academico/{id}/{dni}")
+    @PutMapping("/modificar-academico/{id}/{dni}")
     @ResponseBody
     public ResponseEntity<?> modificarAcademico(@RequestBody Academico AcademicoDTO, @PathVariable(value = "id") Long id, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
