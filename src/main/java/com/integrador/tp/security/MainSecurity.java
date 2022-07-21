@@ -41,11 +41,11 @@ public class MainSecurity extends WebSecurityConfigurerAdapter{
     //.antMatchers("/auth/**")
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+        http.cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/**").permitAll()
+                //.anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
                 .and()
@@ -55,13 +55,13 @@ public class MainSecurity extends WebSecurityConfigurerAdapter{
 
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager(); //To change body of generated methods, choose Tools | Templates.
+        return super.authenticationManager();
     }
 
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean(); //To change body of generated methods, choose Tools | Templates.
+        return super.authenticationManagerBean();
     }
 
     @Override

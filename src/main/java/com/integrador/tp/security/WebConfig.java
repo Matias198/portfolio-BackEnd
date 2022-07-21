@@ -1,4 +1,4 @@
-package com.integrador.tp;
+package com.integrador.tp.security;
 
 
 import org.springframework.context.annotation.Configuration;
