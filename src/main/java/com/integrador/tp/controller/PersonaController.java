@@ -52,7 +52,7 @@ public class PersonaController {
         }
     }
 
-    @PutMapping("/modificar-persona")
+    @PutMapping("/modificar-persona/1/")
     @ResponseBody
     public ResponseEntity<?> modificarPersona(@RequestBody Persona PersonaDTO, @RequestParam Long dni) throws URISyntaxException {
         try {
