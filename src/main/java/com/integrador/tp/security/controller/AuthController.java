@@ -92,7 +92,7 @@ public class AuthController {
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
-                return new ResponseEntity(new Mensaje("Error en los campos."), HttpStatus.CONFLICT);
+                return new ResponseEntity(new Mensaje("Error en los campos."), HttpStatus.BAD_REQUEST);
             }
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getDni(), loginUsuario.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -101,7 +101,7 @@ public class AuthController {
             JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
             return new ResponseEntity(jwtDto, HttpStatus.OK);
         } catch (AuthenticationException e) {
-            return new ResponseEntity(new Mensaje("Error inesperado: " + e.getMessage()), HttpStatus.CHECKPOINT);
+            return new ResponseEntity(new Mensaje("Error inesperado: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
     
