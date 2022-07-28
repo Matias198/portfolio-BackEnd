@@ -8,27 +8,25 @@ import java.net.URISyntaxException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class PersonaController {
 
     @Autowired
     private IPersonaService peServ;
-    
+
     @Autowired
     private UService uServ;
-    
+
     @PostMapping("/crear-persona")
     @ResponseBody
     public ResponseEntity<?> crearPersona(@RequestBody Persona PersonaDTO) throws URISyntaxException {
@@ -52,9 +50,9 @@ public class PersonaController {
         }
     }
 
-    @PutMapping("/modificar-persona/1/")
+    @PutMapping("/modificar-persona/1/{dni}")
     @ResponseBody
-    public ResponseEntity<?> modificarPersona(@RequestBody Persona PersonaDTO, @RequestParam Long dni) throws URISyntaxException {
+    public ResponseEntity<?> modificarPersona(@RequestBody Persona PersonaDTO, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
             Persona auxiliar = peServ.buscarPersona(dni);
             PersonaDTO.setDni(dni);
@@ -71,34 +69,13 @@ public class PersonaController {
             return new ResponseEntity(new Mensaje("Error inesperado " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
-    
+
     @GetMapping("/portfolio")
     @ResponseBody
     public Persona getPersona(@RequestParam Long dni) {
-        if (dni == 1){
+        if (dni == 1) {
             dni = 41419890L;
         }
         return peServ.buscarPersona(dni);
     }
 }
-
-/*
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url = jdbc:mysql://localhost:3306/tpIntegradorDB?useSSL=false&serverTimezone=UTC
-spring.datasource.username=admin
-spring.datasource.password=admin
-spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
-
-
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url = jdbc:mysql://sql10.freesqldatabase.com:3306/sql10493123?useSSL=false&serverTimezone=UTC
-spring.datasource.username=sql10493123
-spring.datasource.password=MZ6eFhy5jB
-spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
-
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url = jdbc:mysql://bcyrnmnbhoaehisdzisw-mysql.services.clever-cloud.com:3306/bcyrnmnbhoaehisdzisw?useSSL=false&serverTimezone=UTC
-spring.datasource.username=uuh0dphvfr9uywnt
-spring.datasource.password=9FtmZX2D4aZ7yyQKu8bO
-spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
- */
