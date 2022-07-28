@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
  
 @Component
-@ WebFilter(asyncSupported = true, urlPatterns = { "/*" })
+@WebFilter(asyncSupported = true, urlPatterns = { "/*" })
 public class CORSFilter implements Filter {
  
   public CORSFilter() {
