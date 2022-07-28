@@ -56,7 +56,15 @@ public class PersonaController {
     @ResponseBody
     public ResponseEntity<?> modificarPersona(@RequestBody Persona PersonaDTO, @RequestParam Long dni) throws URISyntaxException {
         try {
+            Persona auxiliar = peServ.buscarPersona(dni);
             PersonaDTO.setDni(dni);
+            PersonaDTO.setAcademicos(auxiliar.getAcademicos());
+            PersonaDTO.setCompania(auxiliar.getCompania());
+            PersonaDTO.setEscuela(auxiliar.getEscuela());
+            PersonaDTO.setExperiencias(auxiliar.getExperiencias());
+            PersonaDTO.setProyectos(auxiliar.getProyectos());
+            PersonaDTO.setSecciones(auxiliar.getSecciones());
+            PersonaDTO.setSkills(auxiliar.getSkills());
             peServ.crearPersona(PersonaDTO);
             return new ResponseEntity(new Mensaje("Modificado exitosamente"), HttpStatus.OK);
         } catch (Exception e) {
