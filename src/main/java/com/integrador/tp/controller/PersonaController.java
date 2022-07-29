@@ -54,16 +54,16 @@ public class PersonaController {
     @ResponseBody
     public ResponseEntity<?> modificarPersona(@RequestBody Persona PersonaDTO, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
-            Persona auxiliar = peServ.buscarPersona(dni);
-            PersonaDTO.setDni(auxiliar.getDni());
-            PersonaDTO.setAcademicos(auxiliar.getAcademicos());
-            PersonaDTO.setCompania(auxiliar.getCompania());
-            PersonaDTO.setEscuela(auxiliar.getEscuela());
-            PersonaDTO.setExperiencias(auxiliar.getExperiencias());
-            PersonaDTO.setProyectos(auxiliar.getProyectos());
-            PersonaDTO.setSecciones(auxiliar.getSecciones());
-            PersonaDTO.setSkills(auxiliar.getSkills());
-            peServ.crearPersona(PersonaDTO);
+            Persona original = peServ.buscarPersona(dni);
+            original.setNombres(PersonaDTO.getNombres());
+            original.setApellido(PersonaDTO.getApellido());
+            original.setFecha_nacimiento(PersonaDTO.getFecha_nacimiento());
+            original.setNacionalidad(PersonaDTO.getNacionalidad());
+            original.setMail(PersonaDTO.getMail());
+            original.setOcupacion(PersonaDTO.getOcupacion());
+            original.setImage_background(PersonaDTO.getImage_background());
+            original.setImage_perfil(PersonaDTO.getImage_perfil());
+            peServ.crearPersona(original);
             return new ResponseEntity(new Mensaje("Modificado exitosamente"), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(new Mensaje("Error inesperado " + e.getMessage()), HttpStatus.BAD_REQUEST);
