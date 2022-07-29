@@ -76,7 +76,11 @@ public class AuthController {
                 roles.add(rolService.getByRolNombre(RolNombre.ROLE_GUEST).get());
             }
             usuario.setRoles(roles);
-            usuario.setPersona(personaService.buscarPersona(usuario.getDniUsuario()));
+            //usuario.setPersona(personaService.buscarPersona(usuario.getDniUsuario()));
+            System.out.println("Verificando persona dni");
+            if (personaService.buscarPersona(nuevoUsuario.getDni()) != null) {
+                usuario.setPersona(personaService.buscarPersona(nuevoUsuario.getDni()));
+            } 
             usuarioService.save(usuario);
             return new ResponseEntity(new Mensaje("Usuario guardado."), HttpStatus.CREATED);
         } catch (Exception e) {
