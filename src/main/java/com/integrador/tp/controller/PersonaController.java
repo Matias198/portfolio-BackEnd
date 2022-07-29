@@ -55,7 +55,7 @@ public class PersonaController {
     public ResponseEntity<?> modificarPersona(@RequestBody Persona PersonaDTO, @PathVariable(value = "dni") Long dni) throws URISyntaxException {
         try {
             Persona auxiliar = peServ.buscarPersona(dni);
-            PersonaDTO.setDni(dni);
+            PersonaDTO.setDni(auxiliar.getDni());
             PersonaDTO.setAcademicos(auxiliar.getAcademicos());
             PersonaDTO.setCompania(auxiliar.getCompania());
             PersonaDTO.setEscuela(auxiliar.getEscuela());
