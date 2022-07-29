@@ -66,10 +66,6 @@ public class AuthController {
             if (usuarioService.existsByDni(nuevoUsuario.getDni())) {
                 return new ResponseEntity(new Mensaje("Dni ya existente."), HttpStatus.BAD_REQUEST);
             }
-            System.out.println("Verificando persona dni");
-            if (personaService.buscarPersona(nuevoUsuario.getDni()) != null) {
-                return new ResponseEntity(new Mensaje("Persona inexistente."), HttpStatus.BAD_REQUEST);  
-            } 
             System.out.println("Creando usuario Jwt");
             UsuarioJwt usuario = new UsuarioJwt(nuevoUsuario.getDni(), passwordEncoder.encode(nuevoUsuario.getPassword()), null);
             Set<Rol> roles = new HashSet<>();
