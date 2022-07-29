@@ -26,6 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -105,7 +106,7 @@ public class AuthController {
     }
     
     @PostMapping("/nuevo-rol")
-    public ResponseEntity<JwtDto> nuevoRol(@Valid @RequestBody Rol rol) {
+    public ResponseEntity<?> nuevoRol(@Valid @RequestBody Rol rol) {
         try {
             if ((rol.getRolNombre().equals(RolNombre.ROLE_ADMIN)) || 
                 (rol.getRolNombre().equals(RolNombre.ROLE_GUEST)) || 
@@ -115,6 +116,18 @@ public class AuthController {
             }else{
                 return new ResponseEntity(new Mensaje("El rol ingresado no es valido"), HttpStatus.BAD_REQUEST);
             }
+        } catch (Exception e) {
+            return new ResponseEntity(new Mensaje("Error inesperado: " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    @PostMapping("/asociar-persona/{dni}")
+    public ResponseEntity<?> asociarPersona(@Valid @PathVariable(value = "dni") Long dni){
+        try {
+            UsuarioJwt auxiliar = usuarioService.getUsuarioByDni(dni).get();
+            auxiliar.setPersona(personaService.buscarPersona(dni));
+            usuarioService.save(auxiliar);
+            return new ResponseEntity(auxiliar, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(new Mensaje("Error inesperado: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         }
