@@ -1,14 +1,19 @@
 package com.integrador.tp;
 
+import javax.validation.MessageInterpolator.Context;
+import lombok.var;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.Http11NioProtocol;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.apache.tomcat.util.net.SSLHostConfig.CertificateVerification;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -58,14 +63,39 @@ public class CorsConfiguration {
             }
         };
     }
-    
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    return http
-      .requiresChannel(channel -> 
-          channel.anyRequest().requiresSecure())
-      .authorizeRequests(authorize ->
-          authorize.anyRequest().permitAll())
-      .build();
+        return http
+                .requiresChannel(channel
+                        -> channel.anyRequest().requiresSecure())
+                .authorizeRequests(authorize
+                        -> authorize.anyRequest().permitAll())
+                .build();
+    }
+
+    @Bean
+    public ServletWebServerFactory servletContainer() {
+        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() { 
+            protected void postProcessContext(Context context) {
+                var securityConstraint = new SecurityConstraint();
+                securityConstraint.setUserConstraint("CONFIDENTIAL");
+                var collection = new SecurityCollection();
+                collection.addPattern("/*");
+                securityConstraint.addCollection(collection);
+                context.addConstraint(securityConstraint);
+            }
+        };
+        tomcat.addAdditionalTomcatConnectors(getHttpConnector());
+        return tomcat;
+    }
+
+    private Connector getHttpConnector() {
+        var connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
+        connector.setScheme("http");
+        connector.setPort(8080);
+        connector.setSecure(false);
+        connector.setRedirectPort(8443);
+        return connector;
     }
 }
