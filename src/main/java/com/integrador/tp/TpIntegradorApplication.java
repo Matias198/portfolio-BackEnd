@@ -57,7 +57,7 @@ public class TpIntegradorApplication {
         });
 
         // Opcional: Configurar SSL globalmente para todos los conectores (HTTP y HTTPS)
-        tomcat.setSsl(getSslConfiguration());
+        // tomcat.setSsl(getSslConfiguration());
         return tomcat;
     }
 
@@ -73,8 +73,8 @@ public class TpIntegradorApplication {
     }
 
     // Opcional: Implementar SslStoreProvider personalizado si se necesita un proveedor de almacenamiento SSL personalizado
-    private class CustomSslStoreProvider implements SslStoreProvider {
+    //private class CustomSslStoreProvider implements SslStoreProvider {
         // Implementar los métodos necesarios para cargar el certificado y la clave privada de una ubicación personalizada
-    }
+    //}
     
 }
