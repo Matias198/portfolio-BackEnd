@@ -11,7 +11,7 @@ public class TpIntegradorApplication {
         //SpringApplication.run(TpIntegradorApplication.class, args);
         SpringApplication app = new SpringApplication(TpIntegradorApplication.class);
         app.setDefaultProperties(Collections.singletonMap("server.port", "8443")); 
-        app. run(args); 
+        app.run(args); 
         System.out.println("Backend iniciado");
     }    
 }
