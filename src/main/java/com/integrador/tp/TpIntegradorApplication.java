@@ -25,7 +25,7 @@ public class TpIntegradorApplication {
     public TomcatServletWebServerFactory servletContainer() {
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
         tomcat.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> {
-            connector.setPort(8443);
+            connector.setPort(8080);
             connector.setSecure(true);
             connector.setScheme("https");
 
