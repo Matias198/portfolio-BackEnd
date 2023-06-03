@@ -137,7 +137,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                          <jvmArguments>
-                                  -Dserver.port=8080 -Dserver.ssl.key-store=classpath:keystore.p12 -Dserver.ssl.key-store-password=password -Dserver.ssl.key-store-type=PKCS12
+                                  -Dserver.port=8443 -Dserver.ssl.key-store=classpath:keystore.p12 -Dserver.ssl.key-store-password=password -Dserver.ssl.key-store-type=PKCS12
                          </jvmArguments>
                     <excludes>
                         <exclude>
